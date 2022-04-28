@@ -1,0 +1,73 @@
+<PredictScreen>:
+    orientation: 'vertical'
+    ActionBar:
+        ActionView:
+            ActionPrevious:
+                title: "Ứng dụng dự đoán giá nhà"
+            ActionButton:
+                text: "Clear"
+                on_press: root.clear_data()
+            ActionButton:
+                text: "About"
+                on_press: root.display_about_dialog()
+    GridLayout
+        cols: 2
+        spacing: 10
+        Label:
+            text: "Quận"
+        Spinner:
+            pos_hint: {'center': (.5, .5)}
+            text: 'Home'
+            values: 'Home', 'Work', 'Other', 'Custom'
+            on_text: print("The spinner {} has text {}".format(self, self.text))
+        Label:
+            text: "Huyện"
+        Spinner:
+            pos_hint: {'center': (.5, .5)}
+            text: 'Home'
+            values: 'Home', 'Work', 'Other', 'Custom'
+            on_text:
+                print("The spinner {} has text {}".format(self, self.text))
+        Label:
+            text: "Loại hình nhà ở"
+        Spinner:
+            pos_hint: {'center': (.5, .5)}
+            text: 'Home'
+            values: 'Home', 'Work', 'Other', 'Custom'
+            on_text:
+                print("The spinner {} has text {}".format(self, self.text))
+        Label:
+            text: "Giấy tờ pháp lý"
+        Spinner:
+            pos_hint: {'center': (.5, .5)}
+            text: 'Home'
+            values: 'Home', 'Work', 'Other', 'Custom'
+            on_text:
+                print("The spinner {} has text {}".format(self, self.text))
+        Label:
+            text: "Số tầng"
+        TextInput:
+            id: floor_input
+        Label:
+            text: "Số phòng ngủ"
+        TextInput:
+            id: bedroom_input
+        Label:
+            text: "Diện tích"
+        TextInput:
+            id: area_input
+        Label:
+            text: "Chiều dài"
+        TextInput:
+            id: length_input
+        Label:
+            text: "Chiều rộng"
+        TextInput:
+            id: width_input
+    Button:
+        id: predict_button
+        text: "Ước tính giá nhà"
+        size_hint: [1, 0.1]
+        background_normal: ''
+        background_color: "red"
+        on_press: root.predict_house_price()
