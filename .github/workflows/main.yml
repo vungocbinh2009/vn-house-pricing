@@ -22,7 +22,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: vn-house-pricing-windows
-        path: /dist
+        path: ./dist/windows
     
     - name: Package Linux Application
       uses: JackMcKew/pyinstaller-action-linux@main
@@ -32,4 +32,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: vn-house-pricing-windows
-        path: /dist
+        path: ./dist/linux
