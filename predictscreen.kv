@@ -17,57 +17,69 @@
             text: "Quận"
         Spinner:
             pos_hint: {'center': (.5, .5)}
-            text: 'Home'
-            values: 'Home', 'Work', 'Other', 'Custom'
-            on_text: print("The spinner {} has text {}".format(self, self.text))
+            text: "Quận Thanh Xuân"
+            values: root.districts
+            on_text: root.update_ward_list(self.text)
         Label:
             text: "Huyện"
         Spinner:
+            id: ward_spinner
             pos_hint: {'center': (.5, .5)}
-            text: 'Home'
-            values: 'Home', 'Work', 'Other', 'Custom'
+            text: "Phường Thanh Xuân Bắc"
+            values: root.ward_by_district["Quận Thanh Xuân"]
             on_text:
                 print("The spinner {} has text {}".format(self, self.text))
         Label:
             text: "Loại hình nhà ở"
         Spinner:
             pos_hint: {'center': (.5, .5)}
-            text: 'Home'
-            values: 'Home', 'Work', 'Other', 'Custom'
+            text: 'Nhà ngõ, hẻm'
+            values: "Nhà ngõ, hẻm", "Nhà mặt phố, mặt tiền", "Nhà phố liền kề", "Nhà biệt thự"
             on_text:
                 print("The spinner {} has text {}".format(self, self.text))
         Label:
             text: "Giấy tờ pháp lý"
         Spinner:
             pos_hint: {'center': (.5, .5)}
-            text: 'Home'
-            values: 'Home', 'Work', 'Other', 'Custom'
+            text: 'Đã có sổ'
+            values: "Đã có sổ", "Đang chờ sổ", "Giấy tờ khác"
             on_text:
                 print("The spinner {} has text {}".format(self, self.text))
         Label:
             text: "Số tầng"
         TextInput:
             id: floor_input
+            input_filter: "int"
+            on_text: root.update_predict_button_state()
         Label:
             text: "Số phòng ngủ"
         TextInput:
             id: bedroom_input
+            input_filter: "int"
+            on_text: root.update_predict_button_state()
         Label:
             text: "Diện tích"
         TextInput:
             id: area_input
+            input_filter: "float"
+            on_text: root.update_predict_button_state()
         Label:
             text: "Chiều dài"
         TextInput:
             id: length_input
+            input_filter: "float"
+            on_text: root.update_predict_button_state()
         Label:
             text: "Chiều rộng"
         TextInput:
             id: width_input
+            input_filter: "float"
+            on_text: root.update_predict_button_state()
     Button:
         id: predict_button
-        text: "Ước tính giá nhà"
+        text:"Dự đoán giá nhà"
         size_hint: [1, 0.1]
         background_normal: ''
         background_color: "red"
+        disabled: True
         on_press: root.predict_house_price()
