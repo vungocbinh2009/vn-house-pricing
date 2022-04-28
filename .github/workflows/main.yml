@@ -31,5 +31,5 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: vn-house-pricing-windows
+        name: vn-house-pricing-linux
         path: ./dist/linux
