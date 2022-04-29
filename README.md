@@ -9,10 +9,20 @@
 1. Cài đặt Kivy và PyInstaller
 2. Build trên linux
     - Tạo folder build_linux
-    - Chạy script deploy.sh
+    - Chạy các câu lệnh sau:
+```shell
+mkdir dist_linux
+cd dist_linux
+../venv/bin/python3 -m PyInstaller ../house-pricing.spec
+```
 3. Build trên Windows
     - Tạo folder build_windows
-    - Chạy script deploy.bat
+    - Chạy các câu lệnh sau
+```shell
+mkdir dist_windows
+cd dist_windows
+../venv/bin/python3 -m PyInstaller ../house-pricing.spec
+```
 
 # EDA Script
 ```python
