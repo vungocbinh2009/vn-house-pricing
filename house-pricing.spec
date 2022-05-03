@@ -8,7 +8,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('predictscreen.kv', '.')],
+    datas=[('predictscreen.kv', '.'), ("train_data.csv", "."), ("final-model.pickle", ".")],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

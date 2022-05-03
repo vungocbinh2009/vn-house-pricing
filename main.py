@@ -1,6 +1,8 @@
 import os
 import sys
+import pickle
 
+import pandas as pd
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
@@ -8,6 +10,10 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.resources import resource_add_path
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.svm import SVR
 
 Builder.load_file("predictscreen.kv")
 
@@ -113,10 +119,40 @@ class PredictScreen(BoxLayout):
         self.ids["ward_spinner"].values = self.ward_by_district[text]
         self.ids["ward_spinner"].text = self.ward_by_district[text][0]
 
-    def predict_house_price(self):
-
-        self.ids["predict_button"].text = "Dự đoán giá nhà là 1 triệu đồng"
+    def display_predict_value(self):
+        predict_value = self.predict_price()
+        self.ids["predict_button"].text = f"Dự đoán giá nhà là {predict_value: .2f} triệu đồng"
         self.ids["predict_button"].background_color = "green"
+
+    def predict_price(self) -> float:
+        with open('final-model.pickle', 'rb') as f:
+            model: SVR = pickle.load(f)
+        # predict
+        ohe = OneHotEncoder(handle_unknown='ignore')
+        df = pd.read_csv("train_data.csv")
+        x_train = df.drop(["index", "price"], axis=1)
+        # ohe.fit(x_train)
+        preprocessor = ColumnTransformer([
+            ("ohe", ohe, ["district", "ward", "type_of_housing", "legal_paper"]),
+        ])
+        preprocessor.fit(x_train)
+
+        pipe = Pipeline([
+            ("preprocess", preprocessor)
+        ])
+        input_df = pd.DataFrame(data={
+            "district": self.ids["district_spinner"].text,
+            "ward": self.ids["ward_spinner"].text,
+            "type_of_housing": self.ids["type_of_housing_spinner"].text,
+            "legal_paper": self.ids["legal_paper_spinner"].text,
+            "num_floors": float(self.ids["floor_input"].text),
+            "num_bed_rooms": float(self.ids["bedroom_input"].text),
+            "squared_meter_area": float(self.ids["area_input"].text),
+            "length_meter": float(self.ids["length_input"].text),
+            "width_meter": float(self.ids["width_input"].text)
+        }, index=[0])
+        transform_input_data = pipe.transform(input_df)
+        return model.predict(transform_input_data)[0]
 
     def clear_data(self):
         input_list = ["floor_input", "bedroom_input", "area_input", "length_input", "width_input"]

@@ -14,37 +14,39 @@
         cols: 2
         spacing: 10
         Label:
-            text: "Quận"
+            text: "Quận/Huyện"
         Spinner:
+            id: district_spinner
             pos_hint: {'center': (.5, .5)}
             text: "Quận Thanh Xuân"
             values: root.districts
-            on_text: root.update_ward_list(self.text)
+            on_text:
+                root.update_ward_list(self.text)
+                root.update_predict_button_state()
         Label:
-            text: "Huyện"
+            text: "Phường/Xã/Thị trấn"
         Spinner:
             id: ward_spinner
             pos_hint: {'center': (.5, .5)}
             text: "Phường Thanh Xuân Bắc"
             values: root.ward_by_district["Quận Thanh Xuân"]
-            on_text:
-                print("The spinner {} has text {}".format(self, self.text))
+            on_text: root.update_predict_button_state()
         Label:
             text: "Loại hình nhà ở"
         Spinner:
+            id: type_of_housing_spinner
             pos_hint: {'center': (.5, .5)}
             text: 'Nhà ngõ, hẻm'
             values: "Nhà ngõ, hẻm", "Nhà mặt phố, mặt tiền", "Nhà phố liền kề", "Nhà biệt thự"
-            on_text:
-                print("The spinner {} has text {}".format(self, self.text))
+            on_text: root.update_predict_button_state()
         Label:
             text: "Giấy tờ pháp lý"
         Spinner:
+            id: legal_paper_spinner
             pos_hint: {'center': (.5, .5)}
             text: 'Đã có sổ'
             values: "Đã có sổ", "Đang chờ sổ", "Giấy tờ khác"
-            on_text:
-                print("The spinner {} has text {}".format(self, self.text))
+            on_text: root.update_predict_button_state()
         Label:
             text: "Số tầng"
         TextInput:
@@ -82,4 +84,4 @@
         background_normal: ''
         background_color: "red"
         disabled: True
-        on_press: root.predict_house_price()
+        on_press: root.display_predict_value()
