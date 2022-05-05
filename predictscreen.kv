@@ -5,9 +5,6 @@
             ActionPrevious:
                 title: "Ứng dụng dự đoán giá nhà"
             ActionButton:
-                text: "Clear"
-                on_press: root.clear_data()
-            ActionButton:
                 text: "About"
                 on_press: root.display_about_dialog()
     GridLayout
@@ -46,36 +43,6 @@
             pos_hint: {'center': (.5, .5)}
             text: 'Đã có sổ'
             values: "Đã có sổ", "Đang chờ sổ", "Giấy tờ khác"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Số tầng"
-        TextInput:
-            id: floor_input
-            input_filter: "int"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Số phòng ngủ"
-        TextInput:
-            id: bedroom_input
-            input_filter: "int"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Diện tích"
-        TextInput:
-            id: area_input
-            input_filter: "float"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Chiều dài"
-        TextInput:
-            id: length_input
-            input_filter: "float"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Chiều rộng"
-        TextInput:
-            id: width_input
-            input_filter: "float"
             on_text: root.update_predict_button_state()
     Button:
         id: predict_button
