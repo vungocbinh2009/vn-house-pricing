@@ -121,7 +121,7 @@ class PredictScreen(BoxLayout):
 
     def display_predict_value(self):
         predict_value = self.predict_price()
-        self.ids["predict_button"].text = f"Dự đoán giá nhà là {predict_value: .2f} triệu đồng"
+        self.ids["predict_button"].text = f"Dự đoán giá nhà là {predict_value: .2f} triệu đồng / m2"
         self.ids["predict_button"].background_color = "green"
 
     def predict_price(self) -> float:
