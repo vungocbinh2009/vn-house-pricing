@@ -103,8 +103,7 @@ class PredictScreen(BoxLayout):
         'Quận Thanh Xuân': ['Phường Kim Giang', 'Phường Khương Trung', 'Phường Khương Đình', 'Phường Khương Mai',
                             'Phường Nhân Chính', 'Phường Thượng Đình', 'Phường Phương Liệt', 'Phường Thanh Xuân Bắc',
                             'Phường Hạ Đình', 'Phường Thanh Xuân Nam', 'Phường Thanh Xuân Trung'],
-        'Quận Tây Hồ': ['Phường Thụy Khuê', 'Phường Xuân La', 'Phường Bưởi', 'Phường Quảng An', 'Phường Phú Thượng',
-                        'Phường Nhật Tân', 'Phường Yên Phụ', 'Phường Tứ Liên'],
+        'Quận Tây Hồ': ['Phường Thụy Khuê', 'Phường Xuân La', 'Phường Bưởi', 'Phường Quảng An', 'Phường Phú Thượng', 'Phường Nhật Tân', 'Phường Yên Phụ', 'Phường Tứ Liên'],
         'Quận Đống Đa': ['Phường Trung Liệt', 'Phường Láng Hạ', 'Phường Trung Tự', 'Phường Ô Chợ Dừa',
                          'Phường Kim Liên', 'Phường Trung Phụng', 'Phường Ngã Tư Sở', 'Phường Quốc Tử Giám',
                          'Phường Khâm Thiên', 'Phường Láng Thượng', 'Phường Thịnh Quang', 'Phường Nam Đồng',
@@ -144,12 +143,27 @@ class PredictScreen(BoxLayout):
             "district": self.ids["district_spinner"].text,
             "ward": self.ids["ward_spinner"].text,
             "type_of_housing": self.ids["type_of_housing_spinner"].text,
-            "legal_paper": self.ids["legal_paper_spinner"].text
+            "legal_paper": self.ids["legal_paper_spinner"].text,
+            "num_floors": float(self.ids["floor_input"].text),
+            "num_bed_rooms": float(self.ids["bedroom_input"].text),
+            "squared_meter_area": float(self.ids["area_input"].text)
         }, index=[0])
         transform_input_data = pipe.transform(input_df)
         return model.predict(transform_input_data)[0]
 
+    def clear_data(self):
+        input_list = ["floor_input", "bedroom_input", "area_input"]
+        for text_input in input_list:
+            self.ids[text_input].text = ""
+
     def update_predict_button_state(self):
+        input_list = ["floor_input", "bedroom_input", "area_input"]
+        for text_input in input_list:
+            if self.ids[text_input].text == "":
+                self.ids["predict_button"].disabled = True
+                self.ids["predict_button"].background_color = "red"
+                self.ids["predict_button"].text = "Dự đoán giá nhà"
+                return
         self.ids["predict_button"].disabled = False
         self.ids["predict_button"].background_color = "blue"
         self.ids["predict_button"].text = "Dự đoán giá nhà"
