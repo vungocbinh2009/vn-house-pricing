@@ -13,7 +13,7 @@ from kivy.resources import resource_add_path
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
 
 Builder.load_file("predictscreen.kv")
 
@@ -125,7 +125,7 @@ class PredictScreen(BoxLayout):
 
     def predict_price(self) -> float:
         with open('final-model.pickle', 'rb') as f:
-            model: SVR = pickle.load(f)
+            model: RandomForestRegressor = pickle.load(f)
         # predict
         ohe = OneHotEncoder(handle_unknown='ignore')
         df = pd.read_csv("train_data.csv")
