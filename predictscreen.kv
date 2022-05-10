@@ -44,24 +44,6 @@
             text: 'Đã có sổ'
             values: "Đã có sổ", "Đang chờ sổ", "Giấy tờ khác"
             on_text: root.update_predict_button_state()
-        Label:
-            text: "Số tầng"
-        TextInput:
-            id: floor_input
-            input_filter: "int"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Số phòng ngủ"
-        TextInput:
-            id: bedroom_input
-            input_filter: "int"
-            on_text: root.update_predict_button_state()
-        Label:
-            text: "Diện tích"
-        TextInput:
-            id: area_input
-            input_filter: "float"
-            on_text: root.update_predict_button_state()
     Button:
         id: predict_button
         text:"Dự đoán giá nhà"
