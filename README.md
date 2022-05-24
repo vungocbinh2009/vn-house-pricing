@@ -40,21 +40,24 @@ d.open_browser()
 # Slide thuyết trình và tiểu luận báo cáo:
 
 Bao gồm các mục sau:
-1. Xây dựng mô hình bằng autosklearn (tham khảo file autosklearn-notebook.ipynb)
+1. Xây dựng mô hình bằng autosklearn và autokeras
    - Nhập dữ liệu từ file
-   - Xử lý dữ liệu (Đặt lại tên cột, chuyển các giá trị từ string về float)
+   - Xử lý dữ liệu
+     + Đặt lại tên các cột
+     + Xóa bỏ các hàng không phù hợp
+     + Chuyển một số cột về dạng numeric
    - Đánh số ngẫu nhiên số tầng và tính chiều dài, chiều rộng của ngôi nhà
    - Xóa bỏ các giá trị bất thường
-   - Chọn các cột thích hợp
+     + Xóa bỏ các hàng có giá nhà quá cao hoặc quá thấp
+     + Xóa bỏ các hàng có diện tích nhà khác xa với tích giữa chiều dài và chiều rộng.
+     + Xóa bỏ các hàng không có thông tin về giấy tờ pháp lý
+   - Chọn các cột thích hợp để xây dựng mô hình
    - Xóa bỏ các hàng có dữ liệu trống
    - Chia dataset thành tập train và test
-   - One hot encode các cột dữ liệu định tính ở tập train.
-   - Sử dụng auto-sklearn để xây dựng model
-   - Sử dụng scikit-learn train lại model tốt nhất của autosklearn để đưa vào app
-   - Test model và ghi kết quả
-2. Xây dựng mô hình bằng autokeras (tham khảo file autokeras-notebook.ipynb)
-   - Xử lý dữ liệu (Gần như trên)
-   - Dùng AutoKeras để xây dựng model
+   - One hot encode các cột dữ liệu định tính ở tập train (đối với autosklearn)
+   - Sử dụng auto-sklearn và autokeras để xây dựng model
+   - Kiểm tra mô hình bằng test data
 3. Xây dựng ứng dụng.
    - Thư viện GUI sử dụng: Kivy
    - Giao diện của ứng dụng.
+   - Đóng gói ứng dụng bằng PyInstaller
