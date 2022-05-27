@@ -2,14 +2,16 @@
 
 
 block_cipher = None
+from PyInstaller.utils.hooks import collect_submodules
 
+hidden_imports = collect_submodules('sklearn')
 
 a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
     datas=[('predictscreen.kv', '.'), ("train_data.csv", "."), ("final-model.pickle", ".")],
-    hiddenimports=[],
+    hiddenimports=hidden_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
